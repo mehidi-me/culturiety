@@ -11,8 +11,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'menuItems',
-      title: 'Menu Item list',
-      description: 'Links displayed on the header of your site.',
+      title: 'Footer Menu Item list',
       type: 'array',
       of: [
         {
@@ -85,26 +84,8 @@ export default defineType({
     //     },
     //   ],
     // }),
-    defineField({
-      name: 'footer',
-      title: 'Footer Info',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'phone',
-          title: 'Phone Number',
-          type: 'string',
-        }),
-        defineField({
-          name: 'email',
-          title: 'Email Address',
-          type: 'string',
-        }),
-        defineField({
-          name: 'address',
-          title: 'Address',
-          type: 'text',
-        }),
+   
+      
         defineField({
           name: 'socialLinks',
           title: 'Social Links',
@@ -116,10 +97,19 @@ export default defineType({
               type: 'object',
               fields: [
                 defineField({
-                  name: 'platform',
-                  title: 'Platform',
-                  type: 'string',
-                }),
+          name: 'platform',
+          title: 'Platform',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Facebook', value: 'facebook' },
+              { title: 'Instagram', value: 'instagram' },
+              { title: 'LinkedIn', value: 'linkedin' },
+            ],
+            layout: 'dropdown',
+          },
+          validation: (Rule) => Rule.required(),
+        }),
                 defineField({
                   name: 'url',
                   title: 'URL',
@@ -134,10 +124,15 @@ export default defineType({
           name: 'copyright',
           title: 'Copyright Text',
           type: 'string',
-          initialValue: '© 2025 Second Order Science Foundation',
+          initialValue: '©2025 Culturiety. All rights reserved.',
         }),
-      ],
-    }),
+        defineField({
+          name: 'footerlogotext',
+          title: 'Footer Logo Text',
+          type: 'string',
+          initialValue: 'Culturiety',
+        }),
+      
     // defineField({
     //   name: 'adminEmail',
     //   title: 'Admin Email',

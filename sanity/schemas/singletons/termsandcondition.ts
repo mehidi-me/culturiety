@@ -2,19 +2,21 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'Home',
-  title: 'Home',
+  name: 'Terms',
+  title: 'Terms And Conditions',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Home Title',
+      title: 'Title',
       type: 'string',
     }),
     defineField({
-      name: 'subtitle',
-      title: 'Home Sub Title',
-      type: 'string',
+      name: 'content',
+      title: 'Terms Content',
+      type: 'array',
+      of: [{type: 'block'}],
+      description: 'Main text content for the section with rich text formatting support.',
     }),
     defineField({
       name: 'bottomimage',
@@ -28,7 +30,7 @@ export default defineType({
     },
     prepare({title}) {
       return {
-        subtitle: 'Home',
+        subtitle: 'Terms',
         title,
       }
     },

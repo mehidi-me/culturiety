@@ -89,18 +89,14 @@ export type Settings = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  footer?: {
-    phone?: string
-    email?: string
-    address?: string
-    socialLinks?: Array<{
-      platform?: string
-      url?: string
-      _type: 'socialLink'
-      _key: string
-    }>
-    copyright?: string
-  }
+  socialLinks?: Array<{
+    platform?: 'facebook' | 'instagram' | 'linkedin'
+    url?: string
+    _type: 'socialLink'
+    _key: string
+  }>
+  copyright?: string
+  footerlogotext?: string
   seo?: SeoMetaFields
 }
 
@@ -292,95 +288,6 @@ export type About = {
   }
 }
 
-export type Home = {
-  _id: string
-  _type: 'Home'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  heroSection?: {
-    backgroundVideo?: {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-      }
-      _type: 'file'
-    }
-    headline?: string
-    subContent?: {
-      subHeading?: string
-      description?: string
-    }
-    buttons?: {
-      learnMore?: {
-        label?: string
-        link?: string
-      }
-      projects?: {
-        label?: string
-        link?: string
-      }
-    }
-  }
-  aiResearchSection?: {
-    title?: string
-    imageStack?: Array<{
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-      _key: string
-    }>
-  }
-  aiResearchCards?: {
-    cards?: Array<{
-      heading?: string
-      description?: string
-      buttonLabel?: string
-      _type: 'card'
-      _key: string
-    }>
-  }
-  perilsOfSloppyScience?: {
-    title?: string
-    cards?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      heading?: string
-      subHeading?: string
-      description?: string
-      _type: 'card'
-      _key: string
-    }>
-  }
-  sharingTheKnowledge?: {
-    title?: string
-    cards?: Array<{
-      heading?: string
-      description?: string
-      buttonText?: string
-      _type: 'card'
-      _key: string
-    }>
-  }
-}
-
 export type SanityFileAsset = {
   _id: string
   _type: 'sanity.fileAsset'
@@ -401,6 +308,27 @@ export type SanityFileAsset = {
   path?: string
   url?: string
   source?: SanityAssetSourceData
+}
+
+export type Home = {
+  _id: string
+  _type: 'Home'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  subtitle?: string
+  bottomimage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
 }
 
 export type MetaTag = {
@@ -550,8 +478,8 @@ export type AllSanitySchemaTypes =
   | Research
   | ProjectsSection
   | About
-  | Home
   | SanityFileAsset
+  | Home
   | MetaTag
   | MetaAttribute
   | SeoMetaFields
@@ -565,89 +493,25 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "Home" && _id == "Home"][0]{  ...,  heroSection{    ...,    backgroundVideo{      asset->{        url      }    }  },}
+// Query: *[_type == "Home" && _id == "Home"][0]{  ...,}
 export type HomePageQueryResult = {
   _id: string
   _type: 'Home'
   _createdAt: string
   _updatedAt: string
   _rev: string
-  heroSection: {
-    backgroundVideo: {
-      asset: {
-        url: string | null
-      } | null
-    } | null
-    headline?: string
-    subContent?: {
-      subHeading?: string
-      description?: string
+  title?: string
+  subtitle?: string
+  bottomimage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    buttons?: {
-      learnMore?: {
-        label?: string
-        link?: string
-      }
-      projects?: {
-        label?: string
-        link?: string
-      }
-    }
-  } | null
-  aiResearchSection?: {
-    title?: string
-    imageStack?: Array<{
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-      _key: string
-    }>
-  }
-  aiResearchCards?: {
-    cards?: Array<{
-      heading?: string
-      description?: string
-      buttonLabel?: string
-      _type: 'card'
-      _key: string
-    }>
-  }
-  perilsOfSloppyScience?: {
-    title?: string
-    cards?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      heading?: string
-      subHeading?: string
-      description?: string
-      _type: 'card'
-      _key: string
-    }>
-  }
-  sharingTheKnowledge?: {
-    title?: string
-    cards?: Array<{
-      heading?: string
-      description?: string
-      buttonText?: string
-      _type: 'card'
-      _key: string
-    }>
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
   }
 } | null
 // Variable: aboutPageQuery
@@ -836,22 +700,10 @@ export type PagesBySlugQueryResult = null
 // Query: *[_type == "project" && slug.current == $slug][0] {    _id,    _type,    client,    coverImage,    description,    duration,    overview,    site,    "slug": slug.current,    tags,    title,  }
 export type ProjectBySlugQueryResult = null
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    menuItems[],    ogImage,    menuMainButton,    adminEmail,    socialLink,    favicon,    logo,    seo{  _type,metaTitle,nofollowAttributes,seoKeywords,metaDescription,openGraph{_type,siteName,url,description,title,image{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }},twitter{_type,site,creator,cardType,handle},additionalMetaTags[]{_type,metaAttributes[]{_type,attributeValueString,attributeType,attributeKey,attributeValueImage{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }}}  }  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    menuItems[],    ogImage,    socialLinks[],    favicon,    logo,    copyright,    footerlogotext,    seo{  _type,metaTitle,nofollowAttributes,seoKeywords,metaDescription,openGraph{_type,siteName,url,description,title,image{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }},twitter{_type,site,creator,cardType,handle},additionalMetaTags[]{_type,metaAttributes[]{_type,attributeValueString,attributeType,attributeKey,attributeValueImage{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }}}  }  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
-  footer: {
-    phone?: string
-    email?: string
-    address?: string
-    socialLinks?: Array<{
-      platform?: string
-      url?: string
-      _type: 'socialLink'
-      _key: string
-    }>
-    copyright?: string
-  } | null
   menuItems: Array<{
     title?: string
     link?: string
@@ -859,9 +711,12 @@ export type SettingsQueryResult = {
     _key: string
   }> | null
   ogImage: null
-  menuMainButton: null
-  adminEmail: null
-  socialLink: null
+  socialLinks: Array<{
+    platform?: 'facebook' | 'instagram' | 'linkedin'
+    url?: string
+    _type: 'socialLink'
+    _key: string
+  }> | null
   favicon: {
     asset?: {
       _ref: string
@@ -884,6 +739,8 @@ export type SettingsQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   } | null
+  copyright: string | null
+  footerlogotext: string | null
   seo: {
     _type: 'seoMetaFields'
     metaTitle: string | null
@@ -999,13 +856,13 @@ export type SlugsByTypeQueryResult = Array<never>
 
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "Home" && _id == "Home"][0]{\n  ...,\n  heroSection{\n    ...,\n    backgroundVideo{\n      asset->{\n        url\n      }\n    }\n  },\n}': HomePageQueryResult
+    '*[_type == "Home" && _id == "Home"][0]{\n  ...,\n}': HomePageQueryResult
     '*[_type == "about"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': AboutPageQueryResult
     '*[_type == "projectsSection"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ProjectsPageQueryResult
     '*[_type == "research"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ResearchPageQueryResult
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    _type,\n    body,\n    overview,\n    title,\n    "slug": slug.current,\n  }\n': PagesBySlugQueryResult
     '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    _type,\n    client,\n    coverImage,\n    description,\n    duration,\n    overview,\n    site,\n    "slug": slug.current,\n    tags,\n    title,\n  }\n': ProjectBySlugQueryResult
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[],\n    ogImage,\n    menuMainButton,\n    adminEmail,\n    socialLink,\n    favicon,\n    logo,\n    seo{\n  \n_type,\nmetaTitle,\nnofollowAttributes,\nseoKeywords,\nmetaDescription,\nopenGraph{\n\n_type,\nsiteName,\nurl,\ndescription,\ntitle,\nimage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n},\ntwitter{\n\n_type,\nsite,\ncreator,\ncardType,\nhandle\n\n},\nadditionalMetaTags[]{\n_type,\nmetaAttributes[]{\n\n_type,\nattributeValueString,\nattributeType,\nattributeKey,\nattributeValueImage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n}\n}\n\n  }\n  }\n': SettingsQueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    menuItems[],\n    ogImage,\n    socialLinks[],\n    favicon,\n    logo,\n    copyright,\n    footerlogotext,\n    seo{\n  \n_type,\nmetaTitle,\nnofollowAttributes,\nseoKeywords,\nmetaDescription,\nopenGraph{\n\n_type,\nsiteName,\nurl,\ndescription,\ntitle,\nimage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n},\ntwitter{\n\n_type,\nsite,\ncreator,\ncardType,\nhandle\n\n},\nadditionalMetaTags[]{\n_type,\nmetaAttributes[]{\n\n_type,\nattributeValueString,\nattributeType,\nattributeKey,\nattributeValueImage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n}\n}\n\n  }\n  }\n': SettingsQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }

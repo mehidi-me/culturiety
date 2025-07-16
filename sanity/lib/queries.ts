@@ -74,14 +74,9 @@ export const seo = /* groq */ `seo{
 
 export const homePageQuery = defineQuery(`*[_type == "Home" && _id == "Home"][0]{
   ...,
-  heroSection{
-    ...,
-    backgroundVideo{
-      asset->{
-        url
-      }
-    }
-  },
+}`)
+export const termsPageQuery = defineQuery(`*[_type == "Terms" && _id == "Terms"][0]{
+  ...,
 }`)
 
 export const aboutPageQuery = defineQuery(`*[_type == "about"][0]{
@@ -155,14 +150,13 @@ export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     _id,
     _type,
-    footer,
     menuItems[],
     ogImage,
-    menuMainButton,
-    adminEmail,
-    socialLink,
+    socialLinks[],
     favicon,
     logo,
+    copyright,
+    footerlogotext,
     ${seo}
   }
 `)

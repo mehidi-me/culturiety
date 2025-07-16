@@ -42,20 +42,18 @@ const Footer = ({data}) => {
 
   return (
     <footer>
-  <div className="container">
-    <div className="logo">
-      <h1>Culturiety</h1>
-    </div>
-    <div className="copy">
-      <p>©2025 Culturiety. All rights reserved.</p>
-      <div className="links">
-        <Link href="/contact">Contact</Link>
-        <Link href="/terms">Terms of Service/Policy</Link>
+      <div className="container">
+        <div className="logo">
+          <h1>{data?.footerlogotext}</h1>
+        </div>
+        <div className="copy">
+          <p>{data?.copyright}</p>
+          <div className="links">
+            {data?.menuItems?.map((item, index) => <Link href={item.link}>{item.title}</Link>)}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</footer>
-
+    </footer>
   )
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import {urlFor} from '@/sanity/lib/utils'
+import {urlFor, urlForImage} from '@/sanity/lib/utils'
 import {gsap} from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import Image from 'next/image'
@@ -18,7 +18,7 @@ const HomePage = ({data}) => {
     aiResearchSection,
   } = data || {}
 
-
+console.log(data);
   // useEffect(() => {
   //   gsap.utils.toArray('.image-stack .frame').forEach((frame, index) => {
   //     gsap.to(frame, {
@@ -184,12 +184,11 @@ const HomePage = ({data}) => {
   <main>
     <div className="container">
       <div className="title">
-        <h1>Creative chaos, <span>curated</span>
-        </h1>
-        <p>We trim the noise from the worlds of <span>fashion, design, art and culture.</span> Delivering what
-          matters (and
-          what’s next)
-          straight to your inbox.</p>
+    
+          <h1 dangerouslySetInnerHTML={{ __html: data?.title }} />
+          <p dangerouslySetInnerHTML={{ __html: data?.subtitle }} />
+         
+      
       </div>
       <form action className="signup">
         <input type="email" placeholder="Your email" />
@@ -197,7 +196,7 @@ const HomePage = ({data}) => {
       </form>
     </div>
   </main>
-  <img className="main-bg" src="images/main2.svg" alt="" />
+  <img className="main-bg" src={urlForImage(data?.bottomimage).url()} alt="" />
 </div>
 
   )
