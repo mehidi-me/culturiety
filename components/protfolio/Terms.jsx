@@ -17,8 +17,8 @@ function formatDateToMDYY(isoString) {
   <main>
     <div className="container">
       <div className="title t2">
-        <h1>{data.title}</h1>
-        <p>Last Edited {formatDateToMDYY(data._updatedAt)}</p>
+        <h1>{data?.title}</h1>
+        <p>Last Edited {formatDateToMDYY(data?._updatedAt)}</p>
       </div>
       <div className="text-block">
          <PortableText value={data?.content} />
@@ -37,7 +37,7 @@ function formatDateToMDYY(isoString) {
       </div>
     </div>
   </section>
-  <img className="main-bg" src={urlForImage(data?.bottomimage).url()} alt="" />
+  <img className="main-bg" src={urlForImage(data?.bottomimage)?.url()} alt="" />
 </div>
 
   )

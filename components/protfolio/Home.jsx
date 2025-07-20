@@ -196,7 +196,7 @@ console.log(data);
       </form>
     </div>
   </main>
-  <img className="main-bg" src={urlForImage(data?.bottomimage).url()} alt="" />
+  <img className="main-bg" src={urlForImage(data?.bottomimage)?.url()} alt="" />
 </div>
 
   )

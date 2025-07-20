@@ -42,6 +42,28 @@ export type SanityImageDimensions = {
   aspectRatio?: number
 }
 
+export type SanityFileAsset = {
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
+
 export type Geopoint = {
   _type: 'geopoint'
   lat?: number
@@ -100,214 +122,42 @@ export type Settings = {
   seo?: SeoMetaFields
 }
 
-export type Research = {
+export type Terms = {
   _id: string
-  _type: 'research'
+  _type: 'Terms'
   _createdAt: string
   _updatedAt: string
   _rev: string
-  backgroundVideo?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
-    _type: 'file'
-  }
-  heading?: string
-  booksSection?: {
-    title?: string
-    books?: Array<{
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-      _key: string
-    }>
-  }
-  articlesSection?: {
-    title?: string
-    articles?: Array<{
-      title?: string
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      description?: string
-      button?: string
-      buttonLink?: string
-      _key: string
-    }>
-  }
-}
-
-export type ProjectsSection = {
-  _id: string
-  _type: 'projectsSection'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  backgroundVideo?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
-    _type: 'file'
-  }
   title?: string
-  projectsGrid?: {
-    projects?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      title?: string
-      description?: string
-      link?: string
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
       _key: string
     }>
-  }
-}
-
-export type About = {
-  _id: string
-  _type: 'about'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  backgroundVideo?: {
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  bottomimage?: {
     asset?: {
       _ref: string
       _type: 'reference'
       _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    _type: 'file'
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
   }
-  heading?: string
-  subHeading?: string
-  description?: string
-  buttons?: {
-    learnMore?: {
-      label?: string
-      link?: string
-    }
-    projects?: {
-      label?: string
-      link?: string
-    }
-  }
-  aboutAdditionalSection?: {
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-      listItem?: 'bullet' | 'number'
-      markDefs?: Array<{
-        href?: string
-        _type: 'link'
-        _key: string
-      }>
-      level?: number
-      _type: 'block'
-      _key: string
-    }>
-  }
-  teamSection?: {
-    title?: string
-    teamMembers?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      name?: string
-      role?: string
-      socialLinks?: Array<{
-        platform?: 'Facebook' | 'LinkedIn' | 'Website'
-        url?: string
-        _type: 'link'
-        _key: string
-      }>
-      _type: 'teamMember'
-      _key: string
-    }>
-  }
-  ourFocus?: {
-    title?: string
-    focusItems?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      title?: string
-      description?: string
-      link?: string
-      _type: 'focusItem'
-      _key: string
-    }>
-  }
-}
-
-export type SanityFileAsset = {
-  _id: string
-  _type: 'sanity.fileAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  source?: SanityAssetSourceData
 }
 
 export type Home = {
@@ -472,13 +322,11 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
+  | SanityFileAsset
   | Geopoint
   | Slug
   | Settings
-  | Research
-  | ProjectsSection
-  | About
-  | SanityFileAsset
+  | Terms
   | Home
   | MetaTag
   | MetaAttribute
@@ -514,185 +362,54 @@ export type HomePageQueryResult = {
     _type: 'image'
   }
 } | null
+// Variable: termsPageQuery
+// Query: *[_type == "Terms" && _id == "Terms"][0]{  ...,}
+export type TermsPageQueryResult = {
+  _id: string
+  _type: 'Terms'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  bottomimage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+} | null
 // Variable: aboutPageQuery
 // Query: *[_type == "about"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type AboutPageQueryResult = {
-  _id: string
-  _type: 'about'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  backgroundVideo: {
-    asset: {
-      url: string | null
-    } | null
-  } | null
-  heading?: string
-  subHeading?: string
-  description?: string
-  buttons?: {
-    learnMore?: {
-      label?: string
-      link?: string
-    }
-    projects?: {
-      label?: string
-      link?: string
-    }
-  }
-  aboutAdditionalSection?: {
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-      listItem?: 'bullet' | 'number'
-      markDefs?: Array<{
-        href?: string
-        _type: 'link'
-        _key: string
-      }>
-      level?: number
-      _type: 'block'
-      _key: string
-    }>
-  }
-  teamSection?: {
-    title?: string
-    teamMembers?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      name?: string
-      role?: string
-      socialLinks?: Array<{
-        platform?: 'Facebook' | 'LinkedIn' | 'Website'
-        url?: string
-        _type: 'link'
-        _key: string
-      }>
-      _type: 'teamMember'
-      _key: string
-    }>
-  }
-  ourFocus?: {
-    title?: string
-    focusItems?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      title?: string
-      description?: string
-      link?: string
-      _type: 'focusItem'
-      _key: string
-    }>
-  }
-} | null
+export type AboutPageQueryResult = null
 // Variable: projectsPageQuery
 // Query: *[_type == "projectsSection"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type ProjectsPageQueryResult = {
-  _id: string
-  _type: 'projectsSection'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  backgroundVideo: {
-    asset: {
-      url: string | null
-    } | null
-  } | null
-  title?: string
-  projectsGrid?: {
-    projects?: Array<{
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      title?: string
-      description?: string
-      link?: string
-      _key: string
-    }>
-  }
-} | null
+export type ProjectsPageQueryResult = null
 // Variable: researchPageQuery
 // Query: *[_type == "research"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type ResearchPageQueryResult = {
-  _id: string
-  _type: 'research'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  backgroundVideo: {
-    asset: {
-      url: string | null
-    } | null
-  } | null
-  heading?: string
-  booksSection?: {
-    title?: string
-    books?: Array<{
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-      _key: string
-    }>
-  }
-  articlesSection?: {
-    title?: string
-    articles?: Array<{
-      title?: string
-      image?: {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-      description?: string
-      button?: string
-      buttonLink?: string
-      _key: string
-    }>
-  }
-} | null
+export type ResearchPageQueryResult = null
 // Variable: pagesBySlugQuery
 // Query: *[_type == "page" && slug.current == $slug][0] {    _id,    _type,    body,    overview,    title,    "slug": slug.current,  }
 export type PagesBySlugQueryResult = null
@@ -857,6 +574,7 @@ export type SlugsByTypeQueryResult = Array<never>
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "Home" && _id == "Home"][0]{\n  ...,\n}': HomePageQueryResult
+    '*[_type == "Terms" && _id == "Terms"][0]{\n  ...,\n}': TermsPageQueryResult
     '*[_type == "about"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': AboutPageQueryResult
     '*[_type == "projectsSection"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ProjectsPageQueryResult
     '*[_type == "research"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ResearchPageQueryResult

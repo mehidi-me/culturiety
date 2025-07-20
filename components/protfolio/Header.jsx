@@ -7,7 +7,7 @@ import React, {useEffect} from 'react'
 
 function Header({data}) {
   const {menuItems} = data || []
-  console.log(data.socialLinks[0].platform)
+  //console.log(data.socialLinks[0].platform)
 
   const menuFunc = () => {
     const header = document.querySelector('header')
@@ -52,13 +52,13 @@ function Header({data}) {
           <div className="logo">
             <Link href="/">
               {' '}
-              <img src={urlForImage(data.logo).url()} alt="" />
+              <img src={urlForImage(data?.logo)?.url()} alt="" />
             </Link>
           </div>
           <div className="share">
             <p>Share with friends</p>
             <div className="share-media">
-              {data.socialLinks?.map((link, index) => {
+              {data?.socialLinks?.map((link, index) => {
                 console.log(link.platform);
                 // check platform and return corresponding icon
                 if (link?.platform == 'facebook') {

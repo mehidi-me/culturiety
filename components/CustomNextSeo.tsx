@@ -56,6 +56,9 @@ export const getMetaAttribute = (attrs?: MetaAttributeType[]) => {
 
 
 export function generateMetadataC({ settings, slug }): Metadata {
+  if (!settings){
+    return {};
+  }
     const {seo,favicon} = settings;
    
   const { additionalMetaTags, metaDescription, metaTitle, twitter, nofollowAttributes, seoKeywords, openGraph } = seo || {};
