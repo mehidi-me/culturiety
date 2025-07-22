@@ -6,6 +6,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import Image from 'next/image'
 import Link from 'next/link'
 import {useEffect} from 'react'
+import HomeSignup from './HomeSignup'
 
 // gsap.registerPlugin(ScrollTrigger)
 
@@ -190,10 +191,7 @@ console.log(data);
          
       
       </div>
-      <form action className="signup">
-        <input type="email" placeholder="Your email" />
-        <button>Signup</button>
-      </form>
+     <HomeSignup />
     </div>
   </main>
   <img className="main-bg" src={urlForImage(data?.bottomimage)?.url()} alt="" />

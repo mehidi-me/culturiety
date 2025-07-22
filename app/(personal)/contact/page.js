@@ -1,4 +1,4 @@
-
+import ContactForm from '@/components/protfolio/ContactForm'
 
 export default function page() {
   return (
@@ -8,14 +8,7 @@ export default function page() {
       <div className="title t2">
         <h1>Contact us</h1>
       </div>
-      <form action="#">
-        <div className="row">
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-        </div>
-        <textarea name id placeholder="Type your message" defaultValue={""} />
-        <button>Submit</button>
-      </form>
+      <ContactForm />
     </div>
   </main>
   <img className="main-bg" src="images/main2.svg" alt="" />

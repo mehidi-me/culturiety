@@ -15,9 +15,10 @@ import type {Metadata, Viewport} from 'next'
 import {toPlainText, VisualEditing, type PortableTextBlock} from 'next-sanity'
 import {draftMode} from 'next/headers'
 import {Suspense} from 'react'
-import {Toaster} from 'sonner'
+//import {Toaster} from 'sonner'
 import {handleError} from './client-functions'
 import {DraftModeToast} from './DraftModeToast'
+import { Toaster } from 'react-hot-toast';
 
 export async function generateMetadata(): Promise<Metadata> {
   const [{data: settings}] = await Promise.all([
@@ -60,6 +61,7 @@ export default async function IndexRoute({children}: {children: React.ReactNode}
       <Header data={data} />
       {children}
       <Footer data={data} />
+      <Toaster position="top-center" />
       {/* <Footer data={data || {}} /> */}
       {/* <div className="flex min-h-screen flex-col bg-white text-black">
         <Navbar data={data} />

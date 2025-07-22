@@ -3,6 +3,7 @@
 import {urlFor, urlForImage} from '@/sanity/lib/utils'
 import { PortableText } from 'next-sanity';
 import React from 'react'
+import HomeSignup from './HomeSignup';
 
 function Terms({data}) {
 function formatDateToMDYY(isoString) {
@@ -30,10 +31,7 @@ function formatDateToMDYY(isoString) {
     <div className="container">
       <div className="flex cta-2">
         <h2>Sign up today</h2>
-        <form  className="signup">
-          <input type="email" placeholder="Your email" />
-          <button>Signup</button>
-        </form>
+        <HomeSignup />
       </div>
     </div>
   </section>
