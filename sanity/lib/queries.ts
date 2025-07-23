@@ -121,11 +121,7 @@ export const researchPageQuery = defineQuery(`*[_type == "research"][0]{
 
 export const pagesBySlugQuery = defineQuery(`
   *[_type == "page" && slug.current == $slug][0] {
-    _id,
-    _type,
-    body,
-    overview,
-    title,
+    ...,
     "slug": slug.current,
   }
 `)
@@ -157,6 +153,7 @@ export const settingsQuery = defineQuery(`
     logo,
     copyright,
     footerlogotext,
+    adminEmails[],
     ${seo}
   }
 `)

@@ -24,6 +24,7 @@ import about from './sanity/schemas/singletons/about'
 import projects from './sanity/schemas/singletons/projects'
 import research from './sanity/schemas/singletons/research'
 import termsandcondition from './sanity/schemas/singletons/termsandcondition'
+import page from './sanity/schemas/documents/page'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Personal Website with Sanity.io'
@@ -38,14 +39,14 @@ export default defineConfig({
     types: [
       // Singletons
       home,
-      termsandcondition,
+   
       // about,
       // projects,
       // research,
       settings,
       // Documents
       // duration,
-      // page,
+       page,
       // portfolio,
       // portfolioCategory,
       // Objects
@@ -55,14 +56,14 @@ export default defineConfig({
   },
   plugins: [
     structureTool({
-      structure: pageStructure([home, termsandcondition, settings]),
+      structure: pageStructure([ home, settings]),
     }),
     presentationTool({
       resolve,
       previewUrl: {previewMode: {enable: '/api/draft-mode/enable'}},
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    singletonPlugin([home.name, termsandcondition.name, settings.name]),
+    singletonPlugin([home.name, settings.name]),
     // Add an image asset source for Unsplash
     unsplashImageAsset(),
     // Vision lets you query your content with GROQ in the studio

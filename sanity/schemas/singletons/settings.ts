@@ -10,6 +10,24 @@ export default defineType({
   // liveEdit: true,
   fields: [
     defineField({
+      name: 'adminEmails',
+      title: 'Contract Emails - Admin Emails',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'adminEmail',
+          fields: [
+            {
+              name: 'email',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'menuItems',
       title: 'Footer Menu Item list',
       type: 'array',

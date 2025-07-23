@@ -71,6 +71,45 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Page = {
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  bottomimage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
 export type Slug = {
   _type: 'slug'
   current?: string
@@ -324,6 +363,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Page
   | Slug
   | Settings
   | Terms
@@ -412,7 +452,14 @@ export type ProjectsPageQueryResult = null
 export type ResearchPageQueryResult = null
 // Variable: pagesBySlugQuery
 // Query: *[_type == "page" && slug.current == $slug][0] {    _id,    _type,    body,    overview,    title,    "slug": slug.current,  }
-export type PagesBySlugQueryResult = null
+export type PagesBySlugQueryResult = {
+  _id: string
+  _type: 'page'
+  body: null
+  overview: null
+  title: string | null
+  slug: string | null
+} | null
 // Variable: projectBySlugQuery
 // Query: *[_type == "project" && slug.current == $slug][0] {    _id,    _type,    client,    coverImage,    description,    duration,    overview,    site,    "slug": slug.current,    tags,    title,  }
 export type ProjectBySlugQueryResult = null
@@ -569,7 +616,9 @@ export type SettingsQueryResult = {
 } | null
 // Variable: slugsByTypeQuery
 // Query: *[_type == $type && defined(slug.current)]{"slug": slug.current}
-export type SlugsByTypeQueryResult = Array<never>
+export type SlugsByTypeQueryResult = Array<{
+  slug: string | null
+}>
 
 declare module '@sanity/client' {
   interface SanityQueries {
