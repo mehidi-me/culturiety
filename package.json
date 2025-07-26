@@ -16,6 +16,7 @@
     "@next/env": "15.1.7",
     "@phosphor-icons/react": "^2.1.5-alpha.3",
     "@sanity/client": "6.28.0",
+    "@sanity/color-input": "^4.0.5",
     "@sanity/demo": "2.0.0",
     "@sanity/icons": "3.6.0",
     "@sanity/image-url": "1.1.0",

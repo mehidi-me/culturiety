@@ -8,7 +8,7 @@ import React, {useEffect} from 'react'
 function Header({data}) {
   const {menuItems} = data || []
   //console.log(data.socialLinks[0].platform)
-
+  console.log(data)
   const menuFunc = () => {
     const header = document.querySelector('header')
     if (header) {
@@ -59,7 +59,7 @@ function Header({data}) {
             <p>Share with friends</p>
             <div className="share-media">
               {data?.socialLinks?.map((link, index) => {
-                console.log(link.platform);
+                console.log(link.platform)
                 // check platform and return corresponding icon
                 if (link?.platform == 'facebook') {
                   return (
@@ -82,7 +82,6 @@ function Header({data}) {
                     </a>
                   )
                 }
-                
               })}
             </div>
           </div>

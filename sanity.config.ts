@@ -25,6 +25,7 @@ import projects from './sanity/schemas/singletons/projects'
 import research from './sanity/schemas/singletons/research'
 import termsandcondition from './sanity/schemas/singletons/termsandcondition'
 import page from './sanity/schemas/documents/page'
+import { colorInput } from '@sanity/color-input'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Personal Website with Sanity.io'
@@ -70,5 +71,6 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
     seoMetaFields(),
+    colorInput()
   ],
 })

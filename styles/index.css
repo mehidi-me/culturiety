@@ -95,8 +95,8 @@ i {
     width: 100%;
 }
 
-.links{
-        display: flex;
+.links {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 3rem;
@@ -535,6 +535,32 @@ form button {
 
     footer {
         text-align: center;
+    }
+
+    .title h1,
+    footer .logo h1 {
+        font-size: 4rem;
+    }
+
+    main {
+        margin: 10rem 0 5rem;
+    }
+
+    .links {
+        flex-direction: column;
+    }
+
+    .share p {
+        display: none;
+    }
+
+    .share {
+        background: none;
+        padding: 0;
+    }
+
+    .share-media {
+        position: relative
     }
 }
 

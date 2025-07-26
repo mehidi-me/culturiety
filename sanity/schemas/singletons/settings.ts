@@ -61,6 +61,38 @@ export default defineType({
       name: 'favicon',
       type: 'image',
     }),
+    defineField({
+      name: 'colors',
+      title: 'Theme Colors',
+      type: 'object',
+      fields: [
+        {
+          name: 'primary',
+          title: 'Primary Color',
+          type: 'color',
+          options: { disableAlpha: true },
+        },
+        {
+          name: 'secoundary',
+          title: 'Secoundary Color',
+          type: 'color',
+          options: { disableAlpha: true },
+        },
+        {
+          name: 'background',
+          title: 'Background Color',
+          type: 'color',
+          options: { disableAlpha: true },
+        },
+        {
+          name: 'text',
+          title: 'Primary Text Color',
+          type: 'color',
+          options: { disableAlpha: true },
+        },
+      ],
+    }),
+    
     // defineField({
     //   name: 'menuMainButton',
     //   title: 'Menu Main Button',

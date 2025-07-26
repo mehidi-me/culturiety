@@ -153,6 +153,7 @@ export const settingsQuery = defineQuery(`
     logo,
     copyright,
     footerlogotext,
+    colors,
     adminEmails[],
     ${seo}
   }

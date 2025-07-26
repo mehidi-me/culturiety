@@ -15,15 +15,13 @@ import type {Metadata, Viewport} from 'next'
 import {toPlainText, VisualEditing, type PortableTextBlock} from 'next-sanity'
 import {draftMode} from 'next/headers'
 import {Suspense} from 'react'
+import {Toaster} from 'react-hot-toast'
 //import {Toaster} from 'sonner'
 import {handleError} from './client-functions'
 import {DraftModeToast} from './DraftModeToast'
-import { Toaster } from 'react-hot-toast';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{data: settings}] = await Promise.all([
-    sanityFetch({query: settingsQuery, stega: false}),
-  ])
+  const [{data: settings}] = await Promise.all([sanityFetch({query: settingsQuery, stega: false})])
 
   const ogImage = urlForOpenGraphImage(settings?.ogImage)
   // return {
@@ -48,6 +46,17 @@ export const viewport: Viewport = {
 export default async function IndexRoute({children}: {children: React.ReactNode}) {
   const {data} = await sanityFetch({query: settingsQuery})
 
+  const themeVars = {
+    '--bg': data?.colors?.background?.hex || '#ffffff',
+    '--primary': data?.colors?.primary?.hex || '#007bff',
+    '--secoundary': data?.colors?.secoundary?.hex || '#6C5838',
+    '--primary-text': data?.colors?.text?.hex || '#000000',
+  }
+
+  // Convert to inline CSS string
+  const cssVars = Object.entries(themeVars)
+    .map(([key, value]) => `${key}: ${value};`)
+    .join(' ')
   // const query = `*[_type == "Footer"][0]{
   // ...
   // }`
@@ -58,6 +67,9 @@ export default async function IndexRoute({children}: {children: React.ReactNode}
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     </head> */}
       {/* <Navbar data={data} /> */}
+      <head>
+        <style>{`:root { ${cssVars} }`}</style>
+      </head>
       <Header data={data} />
       {children}
       <Footer data={data} />

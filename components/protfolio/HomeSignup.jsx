@@ -1,7 +1,7 @@
 'use client'
 
 import {useSubscribe} from '@/app/hook/useSubscribe'
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {toast} from 'react-hot-toast'
 
 function HomeSignup() {
@@ -10,6 +10,11 @@ function HomeSignup() {
   const [message, setMessage] = useState('')
   const {loading, error, data, subscribe} = useSubscribe()
 
+  const emailInputRef = useRef(null)
+
+  useEffect(() => {
+    emailInputRef.current?.focus()
+  }, [])
   const handleSubmit = async (e) => {
     e.preventDefault()
     const result = await subscribe({email, name, message})
@@ -27,6 +32,7 @@ function HomeSignup() {
     <form onSubmit={handleSubmit} className="signup">
       <input
         type="email"
+        ref={emailInputRef}
         placeholder="Your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}

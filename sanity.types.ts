@@ -122,6 +122,11 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  adminEmails?: Array<{
+    email?: string
+    _type: 'adminEmail'
+    _key: string
+  }>
   menuItems?: Array<{
     title?: string
     link?: string
@@ -150,6 +155,12 @@ export type Settings = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  colors?: {
+    primary?: Color
+    secoundary?: Color
+    background?: Color
+    text?: Color
+  }
   socialLinks?: Array<{
     platform?: 'facebook' | 'instagram' | 'linkedin'
     url?: string
@@ -159,44 +170,6 @@ export type Settings = {
   copyright?: string
   footerlogotext?: string
   seo?: SeoMetaFields
-}
-
-export type Terms = {
-  _id: string
-  _type: 'Terms'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-    listItem?: 'bullet' | 'number'
-    markDefs?: Array<{
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
-    level?: number
-    _type: 'block'
-    _key: string
-  }>
-  bottomimage?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
 }
 
 export type Home = {
@@ -218,6 +191,39 @@ export type Home = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+}
+
+export type Color = {
+  _type: 'color'
+  hex?: string
+  alpha?: number
+  hsl?: HslaColor
+  hsv?: HsvaColor
+  rgb?: RgbaColor
+}
+
+export type RgbaColor = {
+  _type: 'rgbaColor'
+  r?: number
+  g?: number
+  b?: number
+  a?: number
+}
+
+export type HsvaColor = {
+  _type: 'hsvaColor'
+  h?: number
+  s?: number
+  v?: number
+  a?: number
+}
+
+export type HslaColor = {
+  _type: 'hslaColor'
+  h?: number
+  s?: number
+  l?: number
+  a?: number
 }
 
 export type MetaTag = {
@@ -366,8 +372,11 @@ export type AllSanitySchemaTypes =
   | Page
   | Slug
   | Settings
-  | Terms
   | Home
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
   | MetaTag
   | MetaAttribute
   | SeoMetaFields
@@ -404,13 +413,26 @@ export type HomePageQueryResult = {
 } | null
 // Variable: termsPageQuery
 // Query: *[_type == "Terms" && _id == "Terms"][0]{  ...,}
-export type TermsPageQueryResult = {
+export type TermsPageQueryResult = null
+// Variable: aboutPageQuery
+// Query: *[_type == "about"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
+export type AboutPageQueryResult = null
+// Variable: projectsPageQuery
+// Query: *[_type == "projectsSection"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
+export type ProjectsPageQueryResult = null
+// Variable: researchPageQuery
+// Query: *[_type == "research"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
+export type ResearchPageQueryResult = null
+// Variable: pagesBySlugQuery
+// Query: *[_type == "page" && slug.current == $slug][0] {    ...,    "slug": slug.current,  }
+export type PagesBySlugQueryResult = {
   _id: string
-  _type: 'Terms'
+  _type: 'page'
   _createdAt: string
   _updatedAt: string
   _rev: string
   title?: string
+  slug: string | null
   content?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -441,30 +463,11 @@ export type TermsPageQueryResult = {
     _type: 'image'
   }
 } | null
-// Variable: aboutPageQuery
-// Query: *[_type == "about"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type AboutPageQueryResult = null
-// Variable: projectsPageQuery
-// Query: *[_type == "projectsSection"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type ProjectsPageQueryResult = null
-// Variable: researchPageQuery
-// Query: *[_type == "research"][0]{      ...,      backgroundVideo{      asset->{        url      }    }    }
-export type ResearchPageQueryResult = null
-// Variable: pagesBySlugQuery
-// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    _type,    body,    overview,    title,    "slug": slug.current,  }
-export type PagesBySlugQueryResult = {
-  _id: string
-  _type: 'page'
-  body: null
-  overview: null
-  title: string | null
-  slug: string | null
-} | null
 // Variable: projectBySlugQuery
 // Query: *[_type == "project" && slug.current == $slug][0] {    _id,    _type,    client,    coverImage,    description,    duration,    overview,    site,    "slug": slug.current,    tags,    title,  }
 export type ProjectBySlugQueryResult = null
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    _id,    _type,    menuItems[],    ogImage,    socialLinks[],    favicon,    logo,    copyright,    footerlogotext,    seo{  _type,metaTitle,nofollowAttributes,seoKeywords,metaDescription,openGraph{_type,siteName,url,description,title,image{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }},twitter{_type,site,creator,cardType,handle},additionalMetaTags[]{_type,metaAttributes[]{_type,attributeValueString,attributeType,attributeKey,attributeValueImage{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }}}  }  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    menuItems[],    ogImage,    socialLinks[],    favicon,    logo,    copyright,    footerlogotext,    adminEmails[],    seo{  _type,metaTitle,nofollowAttributes,seoKeywords,metaDescription,openGraph{_type,siteName,url,description,title,image{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }},twitter{_type,site,creator,cardType,handle},additionalMetaTags[]{_type,metaAttributes[]{_type,attributeValueString,attributeType,attributeKey,attributeValueImage{  _type,  crop{  _type,  right,  top,  left,  bottom  },  hotspot{  _type,  x,  y,  height,  width,  },  asset->{...}  }}}  }  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -505,6 +508,11 @@ export type SettingsQueryResult = {
   } | null
   copyright: string | null
   footerlogotext: string | null
+  adminEmails: Array<{
+    email?: string
+    _type: 'adminEmail'
+    _key: string
+  }> | null
   seo: {
     _type: 'seoMetaFields'
     metaTitle: string | null
@@ -627,9 +635,9 @@ declare module '@sanity/client' {
     '*[_type == "about"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': AboutPageQueryResult
     '*[_type == "projectsSection"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ProjectsPageQueryResult
     '*[_type == "research"][0]{\n\n      ...,\n      backgroundVideo{\n      asset->{\n        url\n      }\n    }\n    }': ResearchPageQueryResult
-    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    _type,\n    body,\n    overview,\n    title,\n    "slug": slug.current,\n  }\n': PagesBySlugQueryResult
+    '\n  *[_type == "page" && slug.current == $slug][0] {\n    ...,\n    "slug": slug.current,\n  }\n': PagesBySlugQueryResult
     '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    _type,\n    client,\n    coverImage,\n    description,\n    duration,\n    overview,\n    site,\n    "slug": slug.current,\n    tags,\n    title,\n  }\n': ProjectBySlugQueryResult
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    menuItems[],\n    ogImage,\n    socialLinks[],\n    favicon,\n    logo,\n    copyright,\n    footerlogotext,\n    seo{\n  \n_type,\nmetaTitle,\nnofollowAttributes,\nseoKeywords,\nmetaDescription,\nopenGraph{\n\n_type,\nsiteName,\nurl,\ndescription,\ntitle,\nimage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n},\ntwitter{\n\n_type,\nsite,\ncreator,\ncardType,\nhandle\n\n},\nadditionalMetaTags[]{\n_type,\nmetaAttributes[]{\n\n_type,\nattributeValueString,\nattributeType,\nattributeKey,\nattributeValueImage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n}\n}\n\n  }\n  }\n': SettingsQueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    menuItems[],\n    ogImage,\n    socialLinks[],\n    favicon,\n    logo,\n    copyright,\n    footerlogotext,\n    adminEmails[],\n    seo{\n  \n_type,\nmetaTitle,\nnofollowAttributes,\nseoKeywords,\nmetaDescription,\nopenGraph{\n\n_type,\nsiteName,\nurl,\ndescription,\ntitle,\nimage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n},\ntwitter{\n\n_type,\nsite,\ncreator,\ncardType,\nhandle\n\n},\nadditionalMetaTags[]{\n_type,\nmetaAttributes[]{\n\n_type,\nattributeValueString,\nattributeType,\nattributeKey,\nattributeValueImage{\n\n  _type,\n  crop{\n  _type,\n  right,\n  top,\n  left,\n  bottom\n  },\n  hotspot{\n  _type,\n  x,\n  y,\n  height,\n  width,\n  },\n  asset->{...}\n  \n}\n\n}\n}\n\n  }\n  }\n': SettingsQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }
 }
