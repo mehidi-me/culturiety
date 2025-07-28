@@ -462,6 +462,10 @@ form button {
         font-size: 5rem;
     }
 
+    .share:hover {
+        padding: 0
+    }
+
     .signup input {
         font-size: 1.6rem;
     }
