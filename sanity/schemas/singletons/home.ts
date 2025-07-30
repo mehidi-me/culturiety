@@ -17,6 +17,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'subtitle2',
+      title: 'Home Sub Title Two',
+      type: 'string',
+    }),
+    defineField({
       name: 'bottomimage',
       title: 'Bottom Image',
       type: 'image',

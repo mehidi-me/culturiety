@@ -188,6 +188,7 @@ console.log(data);
     
           <h1 dangerouslySetInnerHTML={{ __html: data?.title }} />
           <p dangerouslySetInnerHTML={{ __html: data?.subtitle }} />
+          <p dangerouslySetInnerHTML={{ __html: data?.subtitle2 }} />
          
       
       </div>
